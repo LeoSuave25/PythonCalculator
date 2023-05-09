@@ -29,17 +29,38 @@ while response == "Y":
     print("Choose an operation:")
     for operation_num, (operation_name, _) in operations.items():
         print(f"({operation_num}) {operation_name}")
-    operation = int(input("Enter 1 | 2 | 3 | 4: "))
+
+    while True:
+        try:
+            operation = int(input("Enter 1 | 2 | 3 | 4: "))
+            if operation not in operations:
+                raise ValueError("Invalid operation! Please enter a valid operation number (1-4).")
+            break
+        except ValueError as error:
+                print(error)
+
     #Ask the user for two numbers
+    print(f"You are now using {operations[operation][0]}")
     first_number = get_number_input("Enter the first number: ")
     second_number = get_number_input("Enter the second number: ")
+    try:
+        _, operation_function = operations[operation]
+        result = operation_function(first_number, second_number)
+    except ZeroDivisionError:
+        print("Error: division by zero!")
+        continue
     #Display the result
-    _, operation_function = operations[operation]
-    result = operation_function(first_number, second_number)
     print("Result:", result)
     #Ask the user if the users wants to try again or not
     #If yes, repeat Step 1
-    response = input("Do you want to try again? Y/N: ").upper()
+    while True:
+        try:
+            response = input("Do you want to try again? Y/N: ").upper()
+            if response not in {"Y","N"}:
+                raise ValueError("Invalid Response! Please enter a valid Letter.")
+            break
+        except ValueError as error:
+                print(error)
 #If no, display thank you
 print("Thank You!")
 #Use Python Function and appropriate Exceptions to capture errors during runtime.
