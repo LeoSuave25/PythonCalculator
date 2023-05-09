@@ -24,18 +24,22 @@ operations = {
     3: ("Multiplication", multiply),
     4: ("Division", divide),
 }
-print("Choose an operation:")
-for operation_num, (operation_name, _) in operations.items():
-    print(f"({operation_num}) {operation_name}")
-operation = int(input("Enter 1 | 2 | 3 | 4: "))
-#Ask the user for two numbers
-first_number = get_number_input("Enter the first number: ")
-second_number = get_number_input("Enter the second number: ")
-#Display the result
-_, operation_function = operations[operation]
-result = operation_function(first_number, second_number)
-print("Result:", result)
-#Ask the user if the users wants to try again or not
-#If yes, repeat Step 1
+response = "Y"
+while response == "Y":
+    print("Choose an operation:")
+    for operation_num, (operation_name, _) in operations.items():
+        print(f"({operation_num}) {operation_name}")
+    operation = int(input("Enter 1 | 2 | 3 | 4: "))
+    #Ask the user for two numbers
+    first_number = get_number_input("Enter the first number: ")
+    second_number = get_number_input("Enter the second number: ")
+    #Display the result
+    _, operation_function = operations[operation]
+    result = operation_function(first_number, second_number)
+    print("Result:", result)
+    #Ask the user if the users wants to try again or not
+    #If yes, repeat Step 1
+    response = input("Do you want to try again? Y/N: ").upper()
 #If no, display thank you
+print("Thank You!")
 #Use Python Function and appropriate Exceptions to capture errors during runtime.
